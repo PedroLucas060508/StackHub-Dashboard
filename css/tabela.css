@@ -1,0 +1,382 @@
+:root {
+    --dark-bg: #0f0f0f;
+    --medium-bg: #1a1a1a;
+    --card-bg: #272727;
+    --accent-color: #1bdb55;
+    --accent-hover: #17c34a;
+    --light-text: #f0f0f0;
+    --muted-text: #a0a0a0;
+    --dark-text: #121212;
+    --success-bg: rgba(27, 219, 85, 0.15);
+    --warning-bg: rgba(255, 193, 7, 0.15);
+    --danger-bg: rgba(220, 53, 69, 0.15);
+}
+
+body {
+    background: linear-gradient(135deg, var(--dark-bg) 0%, #151515 100%);
+    color: var(--light-text);
+    font-family: 'Poppins', sans-serif;
+    min-height: 100vh;
+    padding: 20px;
+    background-attachment: fixed;
+}
+
+.glass-card {
+    background: rgba(39, 39, 39, 0.85);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-radius: 16px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.36);
+    overflow: hidden;
+}
+
+.header {
+    padding: 25px 30px;
+    margin-bottom: 25px;
+    position: relative;
+}
+
+.header::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent 0%, var(--accent-color) 50%, transparent 100%);
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+}
+
+.header h2 {
+    font-size: 1.8rem;
+    margin: 0;
+    background: linear-gradient(90deg, var(--light-text) 0%, var(--accent-color) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    display: inline-block;
+}
+
+.header p {
+    color: var(--muted-text);
+    font-size: 0.95rem;
+    margin: 5px 0 0 0;
+}
+
+.dropdown-menu {
+    background: var(--card-bg);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    padding: 10px;
+    z-index: 10000; /* Garante que o dropdown fique na frente */
+}
+
+.dropdown-item {
+    color: var(--light-text);
+    border-radius: 8px;
+    padding: 10px 15px;
+    margin: 3px 0;
+    transition: all 0.3s ease;
+}
+
+.dropdown-item:hover, .dropdown-item:focus, .dropdown-item.active {
+    background-color: var(--accent-color);
+    color: var(--dark-text);
+}
+
+.dropdown-toggle {
+    background: linear-gradient(135deg, var(--accent-color) 0%, var(--accent-hover) 100%);
+    border: none;
+    color: var(--dark-text);
+    font-weight: 600;
+    padding: 12px 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(27, 219, 85, 0.3);
+    transition: all 0.3s ease;
+}
+
+.dropdown-toggle:hover, .dropdown-toggle:focus, .dropdown-toggle.show {
+    background: linear-gradient(135deg, var(--accent-hover) 0%, #15ad45 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(27, 219, 85, 0.4);
+}
+
+.table-container {
+    padding: 25px;
+}
+
+.table-title {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.table-title h4 {
+    margin: 0;
+    font-size: 1.4rem;
+    display: flex;
+    align-items: center;
+}
+
+.table-title i {
+    background: linear-gradient(135deg, var(--accent-color) 0%, var(--accent-hover) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-right: 12px;
+    font-size: 1.6rem;
+}
+
+table {
+    border-collapse: separate;
+    border-spacing: 0;
+    width: 100% !important; /* Garante que a tabela ocupe 100% da largura */
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+thead {
+    background: linear-gradient(135deg, rgba(27, 219, 85, 0.2) 0%, rgba(27, 219, 85, 0.1) 100%) !important;
+}
+
+th {
+    color: var(--accent-color) !important;
+    font-weight: 600;
+    padding: 16px 12px !important;
+    border: none;
+    position: relative;
+}
+
+th::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 12px;
+    right: 12px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent 0%, var(--accent-color) 50%, transparent 100%);
+}
+
+td {
+    padding: 14px 12px !important;
+    border: none;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    vertical-align: middle;
+}
+
+tr {
+    transition: all 0.3s ease;
+}
+
+.table-striped>tbody>tr:nth-of-type(odd) {
+    background-color: rgba(255, 255, 255, 0.03);
+}
+
+.table-hover>tbody>tr:hover {
+    background-color: rgba(27, 219, 85, 0.05);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.badge {
+    font-weight: 500;
+    padding: 6px 10px;
+    border-radius: 8px;
+    font-size: 0.8rem;
+}
+
+.bg-success {
+    background: var(--success-bg) !important;
+    color: var(--accent-color) !important;
+}
+
+.bg-secondary {
+    background: rgba(108, 117, 125, 0.15) !important;
+    color: #8a8a8a !important;
+}
+
+.bg-danger {
+    background: var(--danger-bg) !important;
+    color: #ff6b6b !important;
+}
+
+.btn-group {
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.btn {
+    border-radius: 0;
+    padding: 8px 12px;
+    font-size: 0.85rem;
+    transition: all 0.3s ease;
+}
+
+.btn-warning {
+    background: linear-gradient(135deg, #ffc107 0%, #e0a800 100%);
+    border: none;
+    color: var(--dark-text);
+}
+
+.btn-warning:hover {
+    background: linear-gradient(135deg, #e0a800 0%, #c69500 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(255, 193, 7, 0.3);
+}
+
+.btn-danger {
+    background: linear-gradient(135deg, #dc3545 0%, #c82333 100%);
+    border: none;
+}
+
+.btn-danger:hover {
+    background: linear-gradient(135deg, #c82333 0%, #a71e2a 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(220, 53, 69, 0.3);
+}
+
+.dataTables_wrapper {
+    position: relative;
+}
+
+.dataTables_filter input {
+    background: rgba(255, 255, 255, 0.07) !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    color: white !important;
+    border-radius: 10px !important;
+    padding: 8px 15px !important;
+    transition: all 0.3s ease;
+}
+
+.dataTables_filter input:focus {
+    background: rgba(255, 255, 255, 0.1) !important;
+    border: 1px solid var(--accent-color) !important;
+    box-shadow: 0 0 0 0.2rem rgba(27, 219, 85, 0.25) !important;
+}
+
+.dataTables_length select {
+    background: rgba(255, 255, 255, 0.07) !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    color: white !important;
+    border-radius: 10px !important;
+    padding: 6px 12px !important;
+}
+
+.dataTables_info, .dataTables_paginate {
+    color: var(--muted-text) !important;
+    padding-top: 15px !important;
+}
+
+.page-item.active .page-link {
+    background: linear-gradient(135deg, var(--accent-color) 0%, var(--accent-hover) 100%);
+    border-color: var(--accent-color);
+    color: var(--dark-text);
+    box-shadow: 0 4px 10px rgba(27, 219, 85, 0.3);
+}
+
+.page-link {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: var(--light-text);
+    padding: 8px 15px;
+    margin: 0 3px;
+    border-radius: 10px !important;
+    transition: all 0.3s ease;
+}
+
+.page-link:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.2);
+    color: var(--accent-color);
+    transform: translateY(-2px);
+}
+
+.hidden {
+    display: none;
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.table-section {
+    animation: fadeIn 0.5s ease forwards;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--accent-color);
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--accent-hover);
+}
+
+/* Ajuste para garantir que o dropdown fique na frente */
+.dropdown {
+    position: relative;
+    z-index: 1000;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .header {
+        padding: 20px;
+    }
+    
+    .header h2 {
+        font-size: 1.5rem;
+    }
+    
+    .table-container {
+        padding: 15px;
+    }
+    
+    .dropdown-toggle {
+        padding: 10px 15px;
+        font-size: 0.9rem;
+    }
+    
+    /* Ajuste para tabelas responsivas */
+    .table-responsive {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+    
+    table {
+        min-width: 100% !important;
+    }
+}
+
+.add_button{
+    width: 65px;
+    height: 65px;
+    border-radius: 50%;
+    border: none;
+}
+
+/* Ajuste para garantir que as tabelas ocupem 100% da largura */
+.dataTable {
+    width: 100% !important;
+    margin: 0 auto;
+}
