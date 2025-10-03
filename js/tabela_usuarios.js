@@ -165,16 +165,19 @@
         columns: [
             { data: 'user_id', title: 'Id' },
             { data: 'user_name', title: 'Nome' },
-            { 
-                data: 'freelancer_foto', // CORRIGIDO: usar freelancer_foto em vez de foto
+            {
+                data: 'freelancer_foto',
                 title: 'Foto',
                 render: function (data, type, row) {
-                    if (data) {
-                        // Se tem URL da foto, exibe a imagem
-                        return `<img src="${data}" alt="Foto" style="width: 50px; height: 50px; border-radius: 50%; object-fit: cover;">`;
+                    // Verifica se existe e não é apenas a raiz
+                    if (data && data !== "http://127.0.0.1:8000/") {
+                        return `<img src="${data}" 
+                                    alt="Foto" 
+                                    style="width: 50px; height: 50px; border-radius: 50%; object-fit: cover;">`;
                     } else {
-                        // Se não tem foto, exibe um placeholder
-                        return `<div style="width: 50px; height: 50px; border-radius: 50%; background: #ccc; display: flex; align-items: center; justify-content: center;">
+                        // Se não tiver foto válida, mostra placeholder
+                        return `<div style="width: 50px; height: 50px; border-radius: 50%; background: #ccc; 
+                                            display: flex; align-items: center; justify-content: center;">
                                     <i class="bi bi-person" style="font-size: 20px; color: #666;"></i>
                                 </div>`;
                     }
@@ -326,6 +329,40 @@
             });
 
             $('#tabela_freelancers').DataTable().ajax.reload();
+        });
+
+        $('#pdf-btn').click(function() {
+            const $btn = $(this);
+            const originalHtml = $btn.html();
+            
+            $btn.html('<i class="bi bi-hourglass-split"></i> Gerando PDF...');
+            $btn.prop('disabled', true);
+
+            $.ajax({
+                url: 'http://127.0.0.1:8000/api/gera_pdf',
+                method: 'GET',
+                xhrFields: {
+                    responseType: 'blob'
+                },
+                success: function(blob) {
+                    const url = window.URL.createObjectURL(blob);
+                    const a = document.createElement('a');
+                    a.href = url;
+                    a.download = 'documento.pdf';
+                    document.body.appendChild(a);
+                    a.click();
+                    window.URL.revokeObjectURL(url);
+                    document.body.removeChild(a);
+                },
+                error: function(xhr, status, error) {
+                    console.error('Erro:', error);
+                    alert('Erro ao gerar PDF: ' + error);
+                },
+                complete: function() {
+                    $btn.html(originalHtml);
+                    $btn.prop('disabled', false);
+                }
+            });
         });
 
     });
